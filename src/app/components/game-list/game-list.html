@@ -1,0 +1,38 @@
+<section class="list-root">
+  <h1 class="title">Free-to-Play Games</h1>
+
+  <button class="load-btn" (click)="load()" [disabled]="loading()">
+    {{ loading() ? 'Loading…' : 'Load' }}
+  </button>
+
+  <p class="error" *ngIf="error()">{{ error() }}</p>
+  <p class="empty" *ngIf="!loading() && !error() && games().length === 0">
+    No games yet. Click “Load”.
+  </p>
+
+  <ul class="list" *ngIf="games().length > 0">
+    <li class="item" *ngFor="let g of games(); trackBy: trackId">
+      <article class="card">
+        <div class="thumb-wrap">
+          <img class="thumb" [src]="g.thumbnail" [alt]="g.title" />
+        </div>
+        <div class="card-body">
+          <h3 class="name">{{ g.title }}</h3>
+          <p class="desc">{{ g.short_description }}</p>
+          <ul class="meta">
+            <li><strong>Genre:</strong> {{ g.genre }}</li>
+            <li><strong>Platform:</strong> {{ g.platform }}</li>
+            <li><strong>Publisher:</strong> {{ g.publisher }}</li>
+            <li><strong>Release:</strong> {{ g.release_date }}</li>
+          </ul>
+          <a class="link" [href]="g.game_url" target="_blank" rel="noreferrer">Open game →</a>
+        </div>
+      </article>
+    </li>
+  </ul>
+
+  <footer class="attribution">
+    Data source:
+    <a href="https://www.freetogame.com/" target="_blank" rel="noreferrer">FreeToGame</a>
+  </footer>
+</section>
