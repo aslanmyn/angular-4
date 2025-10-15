@@ -9,6 +9,25 @@
 
 .title { margin: 0; }
 
+
+.search-row {
+  display: grid;
+  gap: 10px;
+}
+.search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .12s ease, box-shadow .12s ease;
+}
+.search-input:focus {
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 3px rgba(165,180,252,.25);
+}
+
 .load-btn {
   border: none;
   padding: 10px 14px;

@@ -1,13 +1,29 @@
 <section class="list-root">
   <h1 class="title">Free-to-Play Games</h1>
 
-  <button class="load-btn" (click)="load()" [disabled]="loading()">
-    {{ loading() ? 'Loading…' : 'Load' }}
-  </button>
+  <div class="search-row">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search by title, genre, platform, publisher…"
+      [disabled]="loading()"
+      (input)="q.set($any($event.target).value)"
+      (keyup.enter)="onSearchCommit(q())"
+      aria-label="Search games"
+    />
+    <div style="display:flex; gap:8px; flex-wrap:wrap">
+      <button class="load-btn" (click)="onSearchCommit(q())" [disabled]="loading()">
+        {{ loading() ? 'Searching…' : 'Search' }}
+      </button>
+      <button class="load-btn" (click)="load()" [disabled]="loading()">
+        {{ loading() ? 'Loading…' : 'Load All' }}
+      </button>
+    </div>
+  </div>
 
   <p class="error" *ngIf="error()">{{ error() }}</p>
   <p class="empty" *ngIf="!loading() && !error() && games().length === 0">
-    No games yet. Click “Load”.
+    No games yet. Use “Load All” or type a query and press Enter/Search.
   </p>
 
   <ul class="list" *ngIf="games().length > 0">
